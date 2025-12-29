@@ -1,3 +1,6 @@
+# Admin Credentials
+- user: admin@admin.com
+- password: admin123
 
 # ProjectPulse
 
