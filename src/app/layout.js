@@ -18,9 +18,9 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="wireframe">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`  `}
       >
         {children}
       </body>

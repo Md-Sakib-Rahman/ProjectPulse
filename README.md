@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+# ProjectPulse
+
+
+A sleek project management dashboard that surfaces project health, team assignments, and role-based dashboards. Built with Next.js + React and styled with Tailwind / DaisyUI to deliver a fast, accessible UI for managers, clients, and team members.
+
+
+
+
+## Key Features
+
+- Role-based Dashboards: Specific interfaces for Admin, Client, and Employee roles with automatic routing via middleware proxy.
+- Dynamic Project Health: Automated calculation of project status (On Track, At Risk, Critical) based on multi-source data points.
+- Risk Management: Proactive risk logging with severity-based impact on project health and a streamlined resolution process.
+- Feedback Loops: Integrated system for employees to submit weekly check-ins and clients to provide satisfaction ratings.
+- Team Management: Admin tools to add or remove employees from specific projects with real-time UI updates.
+- Authentication UX: Professional login experience featuring field validation, loading states, and SweetAlert2 feedback.
+
+
+
+
+
+
+
+
+
+## Tech Stack
+**Framework:** Next.js 16 (App Router).
+
+**Styling:** Tailwind CSS + DaisyUI
+
+**Database:** MongoDB
+
+**State/Forms:** React Hook Form
+
+**Interactivity:** SweetAlert2 & React Icons
+
+**Logic:** Next.js Server Actions
+
 
 ## Getting Started
 
-First, run the development server:
+Clone the repo git clone "< repourl >"
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Install dependencies npm install
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Create environment variables Copy .env.example to .env and set required keys (MongoDB URI, Auth Secret, etc.).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Run in development npm run dev Open http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Development Notes
 
-## Learn More
+    Routing: Handled by proxy.js which redirects users based on their verified JWT role (Admin, Client, or Employee).
 
-To learn more about Next.js, take a look at the following resources:
+    Health Updates: The updateProjectHealth utility is triggered automatically during check-in submissions, risk logging, risk resolution, and client feedback.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    Check-in Frequency: The Employee dashboard flags projects as "Pending" if the lastCheckinDate is more than 7 days old.
+## Project Health Calculation Method
+The Health Score (0–100%) is a logic-based metric that accurately reflects the "pulse" of a project by weighing sentiment against technical risks.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Base Activity:**  Score (Sentiment)
+The system calculates a base score from the three most recent interaction cycles:
 
-## Deploy on Vercel
+- Employee Confidence (50%): Average confidenceLevel (1–5 scale) from the last three check-ins.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Client Satisfaction (50%): Average of satisfactionRating and communicationRating (1–5 scale) from the last three feedbacks.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Normalization: The combined average is multiplied by 10 to convert the 1–10 combined scale into a 0–100 baseline percentage.
+
+
+**Risk Penalties (Deductions):**  The base score is then penalized for every "Open" risk item currently associated with the project:
+
+- High Severity: -15 points per item.
+
+- Medium Severity: -8 points per item.
+
+- Low Severity: -3 points per item.
+
+**Final Status Mapping:**  The resulting score is clamped between 0 and 100 and mapped to a project status:
+
+- On Track: 80% – 100%.
+
+- At Risk: 60% – 79%.
+
+- Critical: Below 60%.
