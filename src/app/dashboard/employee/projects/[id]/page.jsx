@@ -136,7 +136,7 @@ const EmployeeProjectDetails = async ({ params }) => {
           </table>
         </div>
       </section>
-      <section className="bg-red-50 p-6 rounded-2xl border border-red-200 shadow-sm">
+      <section className="bg-red-50/69 p-6 rounded-2xl border border-red-200 shadow-sm">
         <h3 className="text-xl font-bold text-red-800 mb-6 flex items-center gap-2">
           🚩 Active Risks (Action Required)
         </h3>

@@ -148,7 +148,7 @@ const ClientProjectDetails = async ({ params }) => {
         </div>
       </section>
 
-      <section className="bg-orange-50 p-6 rounded-2xl border border-orange-200">
+      <section className="bg-base-50 p-6 rounded-2xl border border-orange-200">
         <h3 className="text-xl font-bold text-orange-800 mb-4 flex items-center gap-2">
           ⚠️ Pending Feedback
         </h3>
@@ -194,12 +194,12 @@ const ClientProjectDetails = async ({ params }) => {
                 </div>
                 <div className="collapse-content space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="p-4 bg-slate-50 rounded-lg">
+                    <div className="p-4 bg-base-100 rounded-lg">
                       <h4 className="font-bold text-base-content text-xs uppercase mb-2">Employee Report</h4>
                       <p><strong>Progress:</strong> {check.progressSummary}</p>
                       <p><strong>Confidence:</strong> {check.confidenceLevel}/5</p>
                     </div>
-                    <div className="p-4 bg-blue-50 rounded-lg border border-blue-100">
+                    <div className="p-4 bg-base-100 rounded-lg border border-blue-100">
                       <h4 className="font-bold text-blue-500 text-xs uppercase mb-2">Your Feedback</h4>
                       <p><strong>Rating:</strong> {check.feedback?.satisfactionRating}/5</p>
                       <p><strong>Comments:</strong> {check.feedback?.comments || "No comments shared."}</p>
