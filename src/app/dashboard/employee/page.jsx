@@ -20,7 +20,6 @@ const EmployeeDashboard = () => {
       const res = await fetch("/api/projects/allprojects");
       const allData = await res.json();
       
-      // Only show projects assigned to this employee
       const myProjects = allData.filter(p => p.employees.includes(userData.userId));
       setProjects(myProjects);
     } catch (err) {

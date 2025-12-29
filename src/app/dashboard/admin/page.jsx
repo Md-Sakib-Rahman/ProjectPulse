@@ -80,7 +80,6 @@ const Admin = () => {
         <div className="my-5">
           <h2 className="font-bold mb-10">Completed</h2>
           <div className="grid grid-cols-3 gap-2 max-sm:grid-cols-1 max-md:grid-cols-2 ">
-            {/* <ProjectCards /> completedProjects */}
             {
               completedProjects.map((project)=>   <ProjectCards key={project._id} project={project} role="admin" /> )
             }
@@ -93,75 +92,3 @@ const Admin = () => {
 
 export default Admin;
 
- 
-// import ProjectCards from "@/compenets/projectCards/ProjectCards";
-// import React, { useEffect, useState, useCallback } from "react";
-// // ... other imports
-
-// const Admin = () => {
-//   const [projects, setProjects] = useState([]);
-//   const [employees, setEmployees] = useState([]);
-//   const [clients, setClients] = useState([]);
-//   const [filter, setFilter] = useState("All");
-
-//   // Using useCallback to prevent unnecessary function re-creation
-//   const loadDashboardData = useCallback(async () => {
-//     try {
-//       // Execute both fetches in parallel to save time ⏳
-//       const [projRes, userRes] = await Promise.all([
-//         fetch("/api/projects/allprojects"),
-//         fetch("/api/userlist")
-//       ]);
-
-//       const projectsData = await projRes.json();
-//       const userData = await userRes.json();
-
-//       // Batching state updates: React 18+ groups these into one render cycle
-//       setProjects(projectsData);
-
-//       if (userData.result === "success") {
-//         setEmployees(userData.data.filter(u => u.role === "employee"));
-//         setClients(userData.data.filter(u => u.role === "client"));
-//       }
-//     } catch (err) {
-//       console.error("Dashboard Init Error:", err);
-//     }
-//   }, []);
-
-//   useEffect(() => {
-//     loadDashboardData();
-//   }, [loadDashboardData]);
-
-//   // Dynamic filter buttons for health status [cite: 78]
-//   const renderFilterButton = (status, colorClass) => (
-//     <button
-//       onClick={() => setFilter(status)}
-//       className={`btn btn-sm ${filter === status ? colorClass : 'btn-outline'}`}
-//     >
-//       {status}
-//     </button>
-//   );
-
-//   return (
-//     <div className="w-11/12 mx-auto">
-//       {/* ... header ... */}
-//       <div className="flex justify-end gap-2 my-4">
-//         <h2>Filters:</h2>
-//         {/* Implementation of required health status interpretations [cite: 79, 80, 81] */}
-//         {renderFilterButton("All", "btn-neutral")}
-//         {renderFilterButton("On Track", "bg-green-500 text-black")}
-//         {renderFilterButton("At Risk", "bg-orange-500 text-black")}
-//         {renderFilterButton("Critical", "bg-red-500 text-black")}
-//       </div>
-
-//       {/* Passing project data to the grid [cite: 94, 103] */}
-//       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-//         {projects
-//           .filter(p => filter === "All" || p.status === filter)
-//           .map(project => (
-//             <ProjectCards key={project._id} data={project} />
-//           ))}
-//       </div>
-//     </div>
-//   );
-// };

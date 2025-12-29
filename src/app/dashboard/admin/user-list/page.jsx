@@ -34,7 +34,6 @@ const UserList = () => {
   } = useForm();
   const selectedRole = watch("role");
   const handleCreateUser = async (data) => {
-    // console.log(data);
     const {name, email, password, role, designation, company } = data
     const newUser = {
       name,
@@ -79,65 +78,13 @@ const UserList = () => {
     <div>
       <div className="flex justify-between w-11/12 mx-auto items-center my-5">
         <h2 className="text-2xl font-bold">User-List</h2>
-        {/* <button className="btn btn-primary btn-outline"></button> */}
         <button
           className="btn"
           onClick={() => document.getElementById("my_modal_5").showModal()}
         >
           Create User
         </button>
-        {/* <dialog
-          ref={modalRef}
-          id="my_modal_5"
-          className="modal modal-bottom sm:modal-middle"
-        >
-          <div className="modal-box">
-            <h3 className="font-bold text-lg">Create User:</h3>
-            <form
-              onSubmit={handleSubmit(handleCreateUser)}
-              className="flex flex-col gap-2 w-full px-2"
-            >
-              <label htmlFor="">Name:</label>
-              <input
-                className="input w-full"
-                type="text"
-                placeholder="Enter User Name"
-                {...register("name")}
-              />
-              <label htmlFor="">Email:</label>
-              <input
-                className="input w-full"
-                type="email"
-                placeholder="Enter User Email"
-                {...register("email")}
-              />
-              <label htmlFor="">Password:</label>
-              <input
-                className="input w-full"
-                type="text"
-                placeholder="Enter User Password"
-                {...register("password")}
-              />
-              <select
-                defaultValue="Pick a Role"
-                className="select appearance-none w-full"
-                {...register("role")}
-              >
-                <option disabled={true}>Pick a Role</option>
-                <option>client</option>
-                <option>employee</option>
-              </select>
-              <button type="submit" className="btn-primary btn btn-outline">
-                Create
-              </button>
-            </form>
-            <div className="modal-action">
-              <form method="dialog">
-                <button onClick={() => modalRef.current?.showModal()} className="btn">Close</button>
-              </form>
-            </div>
-          </div>
-        </dialog> */}
+        
         <dialog
           ref={modalRef}
           id="my_modal_5"
@@ -253,7 +200,6 @@ const UserList = () => {
           </div>
         </div>
         <div>
-          {/* conditional rendering ! */}
 
           {filter.client ? <ClientList data={clientUser} /> : <EmployeeList data={employeeUser} />}
         </div>

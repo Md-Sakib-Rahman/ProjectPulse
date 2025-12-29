@@ -53,17 +53,15 @@ export const Register = async (payload) => {
 
   const password_hashed = await bcrypt.hash(password, 10);
   
-  // Base schema for all users
   let newUser = {
     name,
     email,
     password: password_hashed,
     role,
-    assignedProjects: [], // Initialize as empty array
+    assignedProjects: [], 
     createdAt: new Date()
   };
 
-  // Add role-specific fields
   if (role === "client") newUser.company = payload.company;
   else if (role === "employee") newUser.designation = payload.designation;
 

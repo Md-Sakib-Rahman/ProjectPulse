@@ -1,11 +1,7 @@
 import ThemeControler from "@/compenets/ThemeController/ThemeControler";
 import { cookies } from "next/headers";
 import { verify } from "../../api/auth/verify";
-import { FaChartPie, FaUsers, FaUserTie } from "react-icons/fa6";
-import { AiFillProject } from "react-icons/ai";
-import Link from "next/link";
 import Logout from "@/compenets/Logout/Logout";
-import { FaHistory, FaTasks } from "react-icons/fa";
 const EmployeeLayout = async ({ children }) => {
   const cookieStore = await cookies();
   const token = cookieStore.get("session")?.value;
@@ -34,7 +30,6 @@ const EmployeeLayout = async ({ children }) => {
               </div>
             </div>
           </nav>
-          {/* Page content here */}
           <div>{children}</div>
         </div>
 
